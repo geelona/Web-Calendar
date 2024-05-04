@@ -1,0 +1,19 @@
+.showcase-wrapper {
+    font-family: "Roboto", sans-serif;
+    border: 0.15vw dashed #9747ff;
+    border-radius: 0.5vw;
+    position: relative;
+    max-width: max-content;
+    padding: 1vw;
+
+    & > header {
+        & > h1 {
+            position: absolute;
+            font-size: 0.6vw;
+            top: -1.3vw;
+            left: 0;
+            text-wrap: nowrap;
+            color: #9747ff;
+        }
+    }
+}

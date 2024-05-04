@@ -1,0 +1,24 @@
+.checkboxes-container {
+    width: max-content;
+    margin-right: 3vw;
+
+    & > .showcase-wrapper {
+        display: flex;
+        align-items: center;
+
+        & > ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1vw;
+        }
+
+        & > .states {
+            position: absolute;
+            font-size: 1vw;
+            right: -7.5vw;
+        }
+    }
+}

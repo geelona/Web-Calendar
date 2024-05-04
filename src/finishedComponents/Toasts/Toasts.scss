@@ -1,0 +1,19 @@
+.toasts-container {
+    width: max-content;
+    & > .showcase-wrapper {
+        display: flex;
+        & > ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1vw;
+        }
+        & > .states {
+            position: absolute;
+            font-size: 1vw;
+            right: -4vw;
+        }
+    }
+}

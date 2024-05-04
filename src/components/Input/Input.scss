@@ -1,0 +1,82 @@
+.default-input {
+    display: flex;
+    flex-direction: column;
+
+    font-family: "Roboto", sans-serif;
+
+    & > label {
+        font-size: 0.6vw;
+        font-weight: bold;
+    }
+
+    & > .disabled-lable {
+        color: #737373;
+    }
+
+    & > span {
+        display: none;
+    }
+    & > .error-message {
+        display: block;
+        color: red;
+        font-size: 0.5vw;
+        font-weight: bold;
+        margin-top: 0.25vw;
+    }
+
+    & > div {
+        display: flex;
+        width: 17vw;
+        position: relative;
+
+        & > input {
+            outline: none;
+            border: none;
+            border-bottom: 0.1vw solid #737373;
+            padding: 0.5vw 0;
+            width: 100%;
+            font-size: 0.8vw;
+            background: transparent;
+
+            &:active {
+                border-bottom: 0.1vw solid black;
+            }
+
+            &:disabled {
+                color: #737373;
+                border-bottom: 0.1vw solid #737373;
+            }
+        }
+
+        & > .error-input {
+            border-bottom: 0.1vw solid red;
+        }
+
+        & > .input-eye-button {
+            width: 0.8vw;
+            height: 0.4vw;
+            position: absolute;
+            right: 2%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            outline: none;
+            border: none;
+
+            cursor: pointer;
+
+            & > img {
+                width: 0.8vw;
+                height: 0.4vw;
+            }
+        }
+
+        & > .disabled-input-eye-button {
+            filter: invert(0.5);
+            cursor: default;
+        }
+    }
+}

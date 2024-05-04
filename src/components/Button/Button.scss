@@ -1,0 +1,82 @@
+.default-button {
+    padding: 0.625vw 0.52vw;
+    outline: none;
+    border: 0.1vw solid transparent;
+    border-radius: 0.4vw;
+    font-size: 1vw;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 0.3vw;
+    box-shadow: 0 0.1vw 0.2vw 0 #1018280d;
+    font-family: "Roboto", sans-serif;
+    cursor: pointer;
+
+    transition: all 0.1s linear;
+
+    &:hover,
+    &:active {
+        box-shadow: 0 0.1vw 0.2vw 0 #45454540;
+    }
+
+    &:disabled {
+        box-shadow: 0 1vw 2vw 0 #1018280d;
+        cursor: default;
+    }
+
+    & > img {
+        width: 0.5vw;
+        height: 0.65vw;
+    }
+}
+
+.button-primary {
+    background: #00ae1c;
+    color: #fff;
+
+    &:hover {
+        border: 0.1vw solid #5ce171;
+    }
+
+    &:active {
+        background: #0cd52b;
+    }
+
+    &:disabled {
+        background: #187727;
+        color: #b9b9b9;
+        border: 0.1vw solid transparent;
+
+        & > img {
+            filter: invert(0.25);
+        }
+    }
+}
+
+.button-secondary {
+    background: white;
+    color: #000;
+    border: 0.1vw solid #dedfe5;
+
+    &:hover {
+        background: #efefef;
+    }
+
+    &:active {
+        background: #e0e0e0;
+    }
+
+    &:disabled {
+        border: 0.1vw solid #8d8e91;
+        background: #c8c8c8;
+        color: #737373;
+
+        & > img {
+            filter: invert(0.5);
+        }
+    }
+
+    & > img {
+        filter: invert(1);
+    }
+}

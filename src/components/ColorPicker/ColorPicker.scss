@@ -1,0 +1,132 @@
+.color-picker-container {
+    font-family: "Roboto", sans-serif;
+
+    & > label {
+        font-size: 0.7vw;
+        font-weight: bold;
+    }
+
+    & > .colors {
+        border: 0.1vw solid #dedfe5;
+        border-radius: 0.5vw;
+        width: max-content;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        padding: 0.5vw;
+        gap: 1vw;
+
+        & > .color-container {
+            & > input {
+                position: absolute;
+                display: none;
+            }
+
+            & > label {
+                width: 1vw;
+                height: 1vw;
+                display: flex;
+                border: 0.1vw solid transparent;
+                border-radius: 0.25vw;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                &::after {
+                    content: "";
+                    width: 0.8vw;
+                    height: 0.8vw;
+                    border-radius: 0.25vw;
+                    background: #323749;
+                }
+            }
+
+            & > input:checked + label {
+                border-color: #323749;
+            }
+
+            .color0 {
+                &::after {
+                    background: red;
+                }
+            }
+
+            .color1 {
+                &::after {
+                    background: orange;
+                }
+            }
+
+            .color2 {
+                &::after {
+                    background: yellow;
+                }
+            }
+
+            .color3 {
+                &::after {
+                    background: green;
+                }
+            }
+
+            .color4 {
+                &::after {
+                    background: blue;
+                }
+            }
+
+            .color5 {
+                &::after {
+                    background: purple;
+                }
+            }
+
+            .color6 {
+                &::after {
+                    background: pink;
+                }
+            }
+
+            .color7 {
+                &::after {
+                    background: brown;
+                }
+            }
+
+            .color8 {
+                &::after {
+                    background: black;
+                }
+            }
+
+            .color9 {
+                &::after {
+                    background: white;
+                }
+            }
+
+            .color10 {
+                &::after {
+                    background: gray;
+                }
+            }
+
+            .color11 {
+                &::after {
+                    background: #f0f0f0;
+                }
+            }
+
+            .color12 {
+                &::after {
+                    background: #f0f8ff;
+                }
+            }
+        }
+    }
+}
+
+.main-container--dark {
+    .color-container {
+        filter: invert(1);
+    }
+}

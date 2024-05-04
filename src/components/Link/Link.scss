@@ -1,0 +1,23 @@
+a {
+    color: #00ae1c;
+    text-decoration: none;
+    font-size: 1vw;
+    font-family: "Roboto", sans-serif;
+
+    transition: all 0.1s linear;
+
+    &:hover {
+        text-decoration: underline;
+    }
+
+    &:active {
+        color: #0cd52b;
+        text-decoration: underline;
+    }
+}
+
+.link-disabled {
+    color: #575d58 !important;
+    text-decoration: none !important;
+    cursor: default;
+}

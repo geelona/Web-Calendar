@@ -1,0 +1,38 @@
+.buttons-container {
+    width: max-content;
+    & > .showcase-wrapper {
+        display: flex;
+        align-items: center;
+
+        & > ul:not(:nth-last-child(2)) {
+            margin-right: 3vw;
+        }
+
+        & > ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1vw;
+
+            & > .header {
+                position: absolute;
+                top: -2.5vw;
+                font-size: 0.8vw;
+                font-weight: bold;
+            }
+        }
+
+        & > .states {
+            position: absolute;
+            font-size: 1vw;
+            // font-weight: bold;
+            right: -7.5vw;
+
+            & > li {
+                padding: 0.75vw 0;
+            }
+        }
+    }
+}

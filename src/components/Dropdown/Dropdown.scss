@@ -1,0 +1,92 @@
+.dropdown-menu-container {
+    font-family: "Roboto", sans-serif;
+    width: max-content;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    & > label {
+        font-size: 0.6vw;
+        font-weight: bold;
+    }
+
+    & > .select {
+        padding: 0.4vw 0;
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        border: 0.1vw solid #dedfe5;
+        border-radius: 0.5vw;
+        padding: 0.5vw;
+        padding-right: 1vw;
+        align-self: flex-start;
+        display: flex;
+        gap: 0.5vw;
+        align-items: center;
+
+        & > p {
+            font-size: 1vw;
+            margin: 0;
+        }
+
+        & > img {
+            transform: rotate(180deg);
+        }
+
+        & > .img--rotate {
+            transform: rotate(0deg);
+        }
+
+        &:hover {
+            background: #efefef;
+        }
+    }
+
+    .select--pressed {
+        background: #e0e0e0;
+    }
+
+    & .options-container {
+        margin-top: 0.1vw;
+        border: 0.1vw solid #dee0e5;
+        background: white;
+        border-radius: 0.5vw;
+        display: flex;
+        flex-direction: column;
+        display: none;
+        box-shadow: 0 0.2vw 0.5vw rgba(0, 0, 0, 0.1);
+        max-height: 10rem;
+        overflow-y: scroll;
+        position: absolute;
+        top: 2.5vw;
+
+        &::-webkit-scrollbar {
+            width: 0.25vw;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #dedfe5;
+            border-radius: 1vw;
+        }
+
+        & > .option {
+            background: white;
+            border: none;
+            cursor: pointer;
+            padding: 0.5vw;
+            font-size: 1vw;
+
+            &:hover {
+                background: #f6f6f6;
+            }
+        }
+
+        & > .option--selected {
+            background: #e3e3e3;
+        }
+    }
+
+    & .options-container--active {
+        display: flex;
+    }
+}
