@@ -12,7 +12,6 @@ function Toast({
     visible: boolean;
 }) {
     const toastRef = useRef<HTMLDivElement>(null);
-    console.log(visible, toastRef);
     !visible
         ? toastRef.current?.classList.add("toast-container--inactive")
         : toastRef.current?.classList.remove("toast-container--inactive");
