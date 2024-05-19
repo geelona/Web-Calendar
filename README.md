@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Task3_6
+=======
+# Task3_9
+>>>>>>> 23f50eda25398d45f1b9b8fc4db1855200de124d
 
 
 
@@ -16,14 +20,22 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
+<<<<<<< HEAD
 git remote add origin https://git.foxminded.ua/foxstudent105551/task3_6.git
+=======
+git remote add origin https://git.foxminded.ua/foxstudent105551/task3_9.git
+>>>>>>> 23f50eda25398d45f1b9b8fc4db1855200de124d
 git branch -M main
 git push -uf origin main
 ```
 
 ## Integrate with your tools
 
+<<<<<<< HEAD
 - [ ] [Set up project integrations](https://git.foxminded.ua/foxstudent105551/task3_6/-/settings/integrations)
+=======
+- [ ] [Set up project integrations](https://git.foxminded.ua/foxstudent105551/task3_9/-/settings/integrations)
+>>>>>>> 23f50eda25398d45f1b9b8fc4db1855200de124d
 
 ## Collaborate with your team
 
@@ -92,6 +104,7 @@ For open source projects, say how it is licensed.
 
 ## Project status
 If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+<<<<<<< HEAD
 =======
 # React + TypeScript + Vite
 
@@ -124,3 +137,5 @@ export default {
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
 >>>>>>> c8d7def (first and last commit :P)
+=======
+>>>>>>> 23f50eda25398d45f1b9b8fc4db1855200de124d
