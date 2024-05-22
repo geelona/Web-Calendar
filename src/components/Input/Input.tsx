@@ -9,6 +9,8 @@ function Input({
     Placeholder,
     IsErrored,
     Disabled,
+    value,
+    setValue,
 }: {
     FieldName: string;
     FieldType: string;
@@ -16,6 +18,8 @@ function Input({
     Placeholder: string;
     IsErrored: boolean;
     Disabled: boolean;
+    value?: string;
+    setValue?: (value: string) => void;
 }) {
     const InputRef = useRef<HTMLInputElement>(null);
     const eyeIconRef = useRef<HTMLImageElement>(null);
@@ -42,12 +46,19 @@ function Input({
             </label>
             <div>
                 <input
+                    defaultValue={value}
+                    onChange={(e) => setValue && setValue(e.target.value)}
                     ref={InputRef}
                     type={FieldType}
                     id={FieldName}
                     placeholder={Placeholder}
                     className={IsErrored ? "error-input" : ""}
                     disabled={Disabled}
+                    style={
+                        InputRef.current?.type === "password"
+                            ? { paddingRight: "1.5vw" }
+                            : {}
+                    }
                 />
                 {FieldType === "password" && (
                     <button
@@ -72,6 +83,8 @@ function Input({
 }
 
 Input.propTypes = {
+    value: propTypes.string,
+    setValue: propTypes.func,
     FieldName: propTypes.string.isRequired,
     FieldType: propTypes.oneOf(["text", "password", "email"]).isRequired,
     ErrorMessage: propTypes.string.isRequired,

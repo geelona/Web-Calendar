@@ -1,0 +1,43 @@
+.main-page {
+    background: white;
+    border: 0.1vw solid #dedfe5;
+    box-shadow: 0 0.4vw 0.4vw 0 #0000001a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2vw;
+    border-radius: 0.4vw;
+    gap: 1.5vw;
+
+    & > .continue-google-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 0.1vw solid #dedfe5;
+        box-shadow: 0 0.1vw 0.2vw 0 #1018280d;
+        background: white;
+        border-radius: 0.8vw;
+        padding: 0.5vw 3vw;
+        gap: 0.15vw;
+        outline: none;
+        cursor: pointer;
+        transition: background 0.1s;
+
+        &:hover {
+            background: #f1f1f1;
+        }
+
+        &:active {
+            background: #e8e8e8;
+        }
+
+        & > img {
+            width: 1vw;
+            transform: translateY(-0.05vw);
+        }
+        & > p {
+            margin: 0;
+            font-size: 0.8vw;
+        }
+    }
+}

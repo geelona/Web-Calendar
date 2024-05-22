@@ -1,0 +1,19 @@
+.login-page {
+    & > header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1vw;
+        & > h1 {
+            font-size: 2vw;
+            margin-bottom: 1vw;
+            margin: 0;
+        }
+    }
+
+    & > .form {
+        display: flex;
+        flex-direction: column;
+        gap: 1vw;
+    }
+}

@@ -1,13 +1,21 @@
-import propTypes from "prop-types";
 import "./Datepicker.scss";
 import { useRef, useEffect } from "react";
-
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 
+import {
+    updateShowCaseDate,
+    previousMonth,
+    nextMonth,
+} from "../../state/date/dateSlice";
+
 function Datepicker({}) {
+    const dispatch = useDispatch();
+
     const daysRef = useRef<HTMLDivElement>(null);
 
-    let [date, setDate] = useState(new Date());
+    const date = new Date(useSelector((state: any) => state.date.date));
+
     let [activeDay, setActiveDay] = useState<any>([]);
 
     let month = date.getMonth();
@@ -99,6 +107,8 @@ function Datepicker({}) {
 
     useEffect(() => {
         renderDays();
+        const showcaseDate = `${monthNames[month]} ${year}`;
+        dispatch(updateShowCaseDate(showcaseDate));
     }, [date]);
 
     return (
@@ -111,13 +121,13 @@ function Datepicker({}) {
                     <div
                         className="prev"
                         onClick={() => {
-                            setDate(new Date(year, month - 1, 1));
+                            dispatch(previousMonth());
                         }}
                     ></div>
                     <div
                         className="next"
                         onClick={() => {
-                            setDate(new Date(year, month + 1, 1));
+                            dispatch(nextMonth());
                         }}
                     ></div>
                 </nav>

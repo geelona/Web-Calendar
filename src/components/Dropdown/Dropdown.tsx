@@ -5,9 +5,11 @@ import { useRef } from "react";
 function Dropdown({
     options,
     selectDefault,
+    fontSize,
 }: {
     options: string[];
     selectDefault: string;
+    fontSize?: number;
 }) {
     const selectRef = useRef<HTMLParagraphElement>(null);
     const optionsContainer = useRef<HTMLDivElement>(null);
@@ -43,7 +45,12 @@ function Dropdown({
                 className="select"
                 onClick={handleSelect}
             >
-                <p ref={selectRef}>{selectDefault}</p>
+                <p
+                    style={fontSize ? { fontSize: fontSize + "vw" } : {}}
+                    ref={selectRef}
+                >
+                    {selectDefault}
+                </p>
                 <img
                     ref={imageToRotateRef}
                     src="/components/Dropdown/icon.png"
@@ -56,6 +63,9 @@ function Dropdown({
                             key={index}
                             className="option"
                             onClick={handleOptionClick}
+                            style={
+                                fontSize ? { fontSize: fontSize + "vw" } : {}
+                            }
                         >
                             {option}
                         </button>
@@ -69,6 +79,7 @@ function Dropdown({
 Dropdown.propTypes = {
     options: propTypes.arrayOf(propTypes.string).isRequired,
     selectDefault: propTypes.string.isRequired,
+    fontSize: propTypes.number,
 };
 
 export default Dropdown;

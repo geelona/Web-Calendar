@@ -1,0 +1,52 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+
+    & > .calendars {
+        background: white;
+        box-shadow: 0 0.4vw 0.4vw 0 #0000001a;
+        border-radius: 0.5vw;
+        padding: 1vw;
+
+        & > header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            & > p {
+                font-size: 0.8vw;
+                font-weight: bold;
+                margin: 0;
+            }
+
+            & > button {
+                cursor: pointer;
+                width: 0.8vw;
+                height: 0.8vw;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: white;
+                padding: 0.5vw;
+                border-radius: 50%;
+                outline: none;
+                border: none;
+                transition: background 0.1s;
+
+                &:hover {
+                    background: #e7e7e7;
+                }
+
+                &:active {
+                    background: #dcdcdc;
+                }
+
+                & > img {
+                    width: 0.8vw;
+                    height: 0.8vw;
+                }
+            }
+        }
+    }
+}

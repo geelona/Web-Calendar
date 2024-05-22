@@ -1,55 +1,14 @@
 html,
 body {
     margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
 }
 
 .main-container {
-    background: white;
     min-height: 100vh;
     display: flex;
-    padding: 3vw 1.5vw;
-    font-family: "Roboto", sans-serif;
-
-    & > .theme-container {
-        position: absolute;
-        top: 0.5vw;
-        right: 0.5vw;
-
-        & > button {
-            background: #323749;
-            color: white;
-            border: none;
-            padding: 1vw;
-            border-radius: 0.5vw;
-            cursor: pointer;
-            transition: all 0.1s linear;
-            font-size: 1vw;
-
-            &:hover {
-                background: #1f1f2b;
-            }
-
-            &:active {
-                background: #0d0d17;
-            }
-        }
-    }
-
-    & > .components {
-        height: min-content;
-        align-items: flex-end;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8vw;
-        padding-top: 3vw;
-        // overflow: hidden;
-
-        & > * {
-            height: max-content;
-        }
-    }
-}
-
-.main-container--dark {
-    filter: invert(1);
+    align-items: center;
+    justify-content: center;
+    background: #f2f5f7;
 }

@@ -31,6 +31,7 @@
 
         & > img {
             transform: rotate(180deg);
+            width: 0.7vw;
         }
 
         & > .img--rotate {
@@ -59,6 +60,7 @@
         overflow-y: scroll;
         position: absolute;
         top: 2.5vw;
+        width: 100%;
 
         &::-webkit-scrollbar {
             width: 0.25vw;
@@ -75,6 +77,8 @@
             cursor: pointer;
             padding: 0.5vw;
             font-size: 1vw;
+            text-align: left;
+            width: 100%;
 
             &:hover {
                 background: #f6f6f6;
