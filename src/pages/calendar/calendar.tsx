@@ -4,6 +4,7 @@ import { Navigate } from "react-router-dom";
 
 import Header from "../../components/Header/Header";
 import SideBar from "../../components/SideBar/SideBar";
+import MainGrid from "../../components/MainGrid/MainGrid";
 
 export default function Calendar() {
     const { currentUser } = useAuth();
@@ -17,9 +18,7 @@ export default function Calendar() {
             <Header />
             <div className="calendar-page__data">
                 <SideBar />
-                <div className="calendar-page__data__content">
-                    <span>Calendar</span>
-                </div>
+                <MainGrid />
             </div>
         </div>
     );

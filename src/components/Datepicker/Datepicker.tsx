@@ -1,49 +1,33 @@
 import "./Datepicker.scss";
 import { useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
 
 import {
-    updateShowCaseDate,
     previousMonth,
     nextMonth,
+    updateCurrentDate,
+    updateChoosenDate,
 } from "../../state/date/dateSlice";
+
+import { getMonthNameByNum } from "../../utils/GetMonthNameByNum";
 
 function Datepicker({}) {
     const dispatch = useDispatch();
-
     const daysRef = useRef<HTMLDivElement>(null);
 
-    const date = new Date(useSelector((state: any) => state.date.date));
+    const currentDay = useSelector((state: any) => state.date.currentDay);
+    const currentMonth = useSelector((state: any) => state.date.currentMonth);
+    const currentYear = useSelector((state: any) => state.date.currentYear);
 
-    let [activeDay, setActiveDay] = useState<any>([]);
+    const choosenDay = useSelector((state: any) => state.date.choosenDay);
+    const choosenMonth = useSelector((state: any) => state.date.choosenMonth);
+    const choosenYear = useSelector((state: any) => state.date.choosenYear);
 
-    let month = date.getMonth();
-    let year = date.getFullYear();
+    const start = new Date(currentYear, currentMonth, 1).getDay();
+    const endDate = new Date(currentYear, currentMonth + 1, 0).getDate();
 
-    let currentMonth = new Date().getMonth();
-    let currentYear = new Date().getFullYear();
-
-    const start = new Date(year, month, 1).getDay();
-    const endDate = new Date(year, month + 1, 0).getDate();
-
-    const end = new Date(year, month, endDate).getDay();
-    const endDatePrev = new Date(year, month, 0).getDate();
-
-    const monthNames = [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December",
-    ];
+    const end = new Date(currentYear, currentMonth, endDate).getDay();
+    const endDatePrev = new Date(currentYear, currentMonth, 0).getDate();
 
     function clickDayHandler(e: any) {
         if (
@@ -57,7 +41,8 @@ function Datepicker({}) {
 
         let day = e.target;
         day.classList.add("active");
-        setActiveDay([day.textContent, month, year]);
+        const tempActiveDay = [day.textContent, currentMonth, currentYear];
+        dispatch(updateChoosenDate(tempActiveDay));
     }
 
     function renderDays() {
@@ -73,18 +58,18 @@ function Datepicker({}) {
         }
         for (let i = 1; i <= endDate; i++) {
             if (
-                i === new Date().getDate() &&
-                month === currentMonth &&
-                year === currentYear
+                currentDay == i &&
+                currentMonth === new Date().getMonth() &&
+                currentYear === new Date().getFullYear()
             ) {
                 daysRef.current?.insertAdjacentHTML(
                     "beforeend",
                     `<div class="today">${i}</div>`
                 );
             } else if (
-                i == activeDay[0] &&
-                month == activeDay[1] &&
-                year == activeDay[2]
+                i == choosenDay &&
+                choosenMonth == currentMonth &&
+                choosenYear == currentYear
             ) {
                 daysRef.current?.insertAdjacentHTML(
                     "beforeend",
@@ -107,15 +92,13 @@ function Datepicker({}) {
 
     useEffect(() => {
         renderDays();
-        const showcaseDate = `${monthNames[month]} ${year}`;
-        dispatch(updateShowCaseDate(showcaseDate));
-    }, [date]);
+    }, [currentMonth]);
 
     return (
         <div className="datepicker-container">
             <header>
                 <div className="currentDateTitle">
-                    {monthNames[month]} {year}
+                    {getMonthNameByNum(currentMonth)} {currentYear}
                 </div>
                 <nav>
                     <div

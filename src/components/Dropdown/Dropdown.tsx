@@ -1,6 +1,8 @@
 import propTypes from "prop-types";
 import "./Dropdown.scss";
 import { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { changeDaysAmount } from "../../state/date/dataSlice";
 
 function Dropdown({
     options,
@@ -11,6 +13,8 @@ function Dropdown({
     selectDefault: string;
     fontSize?: number;
 }) {
+    const dispatch = useDispatch();
+
     const selectRef = useRef<HTMLParagraphElement>(null);
     const optionsContainer = useRef<HTMLDivElement>(null);
     const imageToRotateRef = useRef<HTMLImageElement>(null);
@@ -25,9 +29,9 @@ function Dropdown({
     const handleOptionClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         clearActive();
         (event.target as HTMLButtonElement).classList.add("option--selected");
-        selectRef.current!.innerText = (
-            event.target as HTMLButtonElement
-        ).innerText;
+        const text = (event.target as HTMLButtonElement).innerText;
+        selectRef.current!.innerText = text;
+        dispatch(changeDaysAmount(text === "Week" ? 7 : 1));
         handleSelect();
     };
 
@@ -80,6 +84,7 @@ Dropdown.propTypes = {
     options: propTypes.arrayOf(propTypes.string).isRequired,
     selectDefault: propTypes.string.isRequired,
     fontSize: propTypes.number,
+    onChange: propTypes.func,
 };
 
 export default Dropdown;

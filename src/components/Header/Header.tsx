@@ -10,6 +10,8 @@ import { logOutHandler } from "../../utils/LogOut";
 
 import { previousMonth, nextMonth } from "../../state/date/dateSlice";
 
+import { getMonthNameByNum } from "../../utils/GetMonthNameByNum";
+
 import CompanyLogo from "../CompanyLogo/CompanyLogo";
 import Button from "../Button/Button";
 import ControlMonthButton from "../controlMonthButton/controlMonthButton";
@@ -29,7 +31,8 @@ export default function Header() {
         setShowLogOut(!showLogOut);
     };
 
-    const showcaseDate = useSelector((state: any) => state.date.showcaseDate);
+    const currentMonth = useSelector((state: any) => state.date.currentMonth);
+    const currentYear = useSelector((state: any) => state.date.currentYear);
 
     return (
         <header className="header">
@@ -61,7 +64,9 @@ export default function Header() {
                         direction="right"
                     />
                 </div>
-                <p>{showcaseDate}</p>
+                <p>
+                    {getMonthNameByNum(currentMonth)} {currentYear}
+                </p>
             </div>
             <div className="header__group2">
                 <Dropdown
