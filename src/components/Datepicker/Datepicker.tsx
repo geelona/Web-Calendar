@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
     previousMonth,
     nextMonth,
-    updateCurrentDate,
     updateChoosenDate,
 } from "../../state/date/dateSlice";
 

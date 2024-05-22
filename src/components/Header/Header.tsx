@@ -71,7 +71,7 @@ export default function Header() {
             <div className="header__group2">
                 <Dropdown
                     options={["Day", "Week"]}
-                    selectDefault="Day"
+                    selectDefault="Week"
                     fontSize={0.8}
                 />
                 <div className="header__group2__user-info">

@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { update } from "firebase/database";
 
 interface DateState {
     currentDay?: number;
@@ -14,9 +13,9 @@ const initialState: DateState = {
     currentDay: new Date().getDate(),
     currentMonth: new Date().getMonth(),
     currentYear: new Date().getFullYear(),
-    choosenDay: null,
-    choosenMonth: null,
-    choosenYear: null,
+    choosenDay: new Date().getDate(),
+    choosenMonth: new Date().getMonth(),
+    choosenYear: new Date().getFullYear(),
 };
 
 const dateSlice = createSlice({
