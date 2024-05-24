@@ -4,48 +4,45 @@ import { useRef } from "react";
 
 function Modal({
     title,
-    text,
-    isOpen,
+    children,
+    onClose,
     maxWidth,
+    className,
 }: {
     title: string;
-    text: string;
-    isOpen: boolean;
-    maxWidth: string;
+    children: React.ReactNode;
+    onClose: () => void;
+    maxWidth?: string;
+    className?: string;
 }) {
     const containerRef = useRef<HTMLDivElement>(null);
-
-    isOpen
-        ? containerRef.current?.classList.remove("modal-container--hide")
-        : containerRef.current?.classList.add("modal-container--hide");
     return (
         <div
             ref={containerRef}
-            className="modal-container"
+            className={"modal-container" + (className ? ` ${className}` : "")}
             style={{ maxWidth }}
         >
             <div className="modal-header">
                 <h1>{title}</h1>
                 <button
                     onClick={() => {
-                        containerRef.current!.classList.toggle(
-                            "modal-container--hide"
-                        );
+                        onClose();
                     }}
                 >
                     <img src="/components/Modal/close.png" />
                 </button>
             </div>
-            <div className="modal-body">{text}</div>
+            <div className="modal-body">{children}</div>
         </div>
     );
 }
 
 Modal.propTypes = {
     title: propTypes.string.isRequired,
-    text: propTypes.string.isRequired,
-    isOpen: propTypes.bool.isRequired,
+    children: propTypes.node.isRequired,
+    onClose: propTypes.func.isRequired,
     maxWidth: propTypes.string.isRequired,
+    className: propTypes.string,
 };
 
 export default Modal;

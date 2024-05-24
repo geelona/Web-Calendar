@@ -1,21 +1,66 @@
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
 import "./Checkbox.scss";
 
-function Checkbox({ LabelOn, Label }: { LabelOn: boolean; Label: string }) {
+function Checkbox({
+    LabelOn,
+    Label,
+    uniqueKey,
+    color,
+    checkedValue,
+    onChange,
+}: {
+    LabelOn: boolean;
+    Label: string;
+    uniqueKey: string;
+    color: string;
+    checkedValue: boolean;
+    onChange: () => void;
+}) {
+    const [isChecked, setIsChecked] = useState(false);
+
+    useEffect(() => {
+        setIsChecked(checkedValue);
+    }, [checkedValue]);
+
+    const handleCheckboxChange = () => {
+        onChange();
+    };
+
+    const checkboxStyle = {
+        borderColor: color,
+        backgroundColor: isChecked ? color : "transparent",
+    };
+
+    const checkmarkStyle = {
+        display: isChecked ? "block" : "none",
+    };
+
     return (
         <div className="checkbox-container">
             <div className="checkbox-container__input">
-                <input id="checkbox" type="checkbox" />
-                <img src="/components/Checkbox/check-mark.png" />
+                <input
+                    id={uniqueKey}
+                    type="checkbox"
+                    onChange={handleCheckboxChange}
+                    style={checkboxStyle}
+                    checked={checkedValue}
+                />
+                <img
+                    src="/components/Checkbox/check-mark.png"
+                    style={checkmarkStyle}
+                />
             </div>
-            {LabelOn && <label htmlFor="checkbox">{Label}</label>}
+            {LabelOn && <label htmlFor={uniqueKey}>{Label}</label>}
         </div>
     );
 }
 
 Checkbox.propTypes = {
-    LabelOn: propTypes.bool,
-    Label: propTypes.string,
+    LabelOn: PropTypes.bool,
+    Label: PropTypes.string,
+    uniqueKey: PropTypes.string.isRequired,
+    color: PropTypes.string,
 };
 
 export default Checkbox;

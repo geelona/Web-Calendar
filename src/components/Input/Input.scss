@@ -3,6 +3,7 @@
     flex-direction: column;
 
     font-family: "Roboto", sans-serif;
+    flex: 1;
 
     & > label {
         font-size: 0.6vw;
@@ -26,7 +27,7 @@
 
     & > div {
         display: flex;
-        width: 17vw;
+        max-width: 17vw;
         position: relative;
 
         & > input {

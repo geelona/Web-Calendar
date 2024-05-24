@@ -1,0 +1,41 @@
+.create-edit-calendar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vw;
+
+    & > .title,
+    & > .color {
+        display: flex;
+        align-items: center;
+        gap: 1vw;
+    }
+
+    & > .title {
+        & > img {
+            width: 0.8vw;
+            height: 0.8vw;
+        }
+    }
+
+    & > .color {
+        & .color__img-container {
+            width: 0.8vw;
+            height: 0.8vw;
+            & > img {
+                width: 1.1vw;
+                height: 1.1vw;
+            }
+        }
+    }
+
+    & > .button-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1vw;
+
+        & > button {
+            padding-right: 1.5vw;
+            padding-left: 1.5vw;
+        }
+    }
+}

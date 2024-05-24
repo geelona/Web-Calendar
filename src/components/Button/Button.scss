@@ -30,8 +30,10 @@
     }
 
     & > img {
-        width: 0.5vw;
-        height: 0.65vw;
+        position: relative;
+        width: 0.55vw;
+        height: 0.55vw;
+        top: -5%;
     }
 
     & > p {
