@@ -1,5 +1,5 @@
 import "./Dropdowns.scss";
-import Dropdown from "../../components/Dropdown/Dropdown";
+import Dropdown from "../../components/common/Dropdown/Dropdown";
 import ShowcaseWrapper from "../../components/ShowcaseWrapper/ShowcaseWrapper";
 
 function Dropdowns() {

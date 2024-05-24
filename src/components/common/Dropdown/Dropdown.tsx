@@ -2,7 +2,7 @@ import propTypes from "prop-types";
 import "./Dropdown.scss";
 import { useRef } from "react";
 import { useDispatch } from "react-redux";
-import { changeDaysAmount } from "../../state/date/dataSlice";
+import { changeDaysAmount } from "../../../state/date/dataSlice";
 
 function Dropdown({
     options,

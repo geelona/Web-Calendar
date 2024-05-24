@@ -1,5 +1,5 @@
 import "./Inputs.scss";
-import Input from "../../components/Input/Input";
+import Input from "../../components/common/Input/Input";
 import ShowcaseWrapper from "../../components/ShowcaseWrapper/ShowcaseWrapper";
 
 function Inputs() {

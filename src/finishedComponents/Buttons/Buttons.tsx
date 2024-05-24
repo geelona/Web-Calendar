@@ -1,5 +1,5 @@
 import "./Buttons.scss";
-import Button from "../../components/Button/Button";
+import Button from "../../components/common/Button/Button";
 import ShowcaseWrapper from "../../components/ShowcaseWrapper/ShowcaseWrapper";
 
 function Buttons() {

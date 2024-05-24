@@ -1,5 +1,5 @@
 import "./ColorPickers.scss";
-import ColorPicker from "../../components/ColorPicker/ColorPicker";
+import ColorPicker from "../../components/common/ColorPicker/ColorPicker";
 import ShowcaseWrapper from "../../components/ShowcaseWrapper/ShowcaseWrapper";
 
 function ColorPickers() {

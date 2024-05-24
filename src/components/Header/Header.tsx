@@ -12,10 +12,10 @@ import { previousMonth, nextMonth } from "../../state/date/dateSlice";
 
 import { getMonthNameByNum } from "../../utils/GetMonthNameByNum";
 
-import CompanyLogo from "../CompanyLogo/CompanyLogo";
-import Button from "../Button/Button";
+import CompanyLogo from "../common/CompanyLogo/CompanyLogo";
+import Button from "../common/Button/Button";
 import ControlMonthButton from "../controlMonthButton/controlMonthButton";
-import Dropdown from "../Dropdown/Dropdown";
+import Dropdown from "../common/Dropdown/Dropdown";
 
 export default function Header() {
     const dispatch = useDispatch();

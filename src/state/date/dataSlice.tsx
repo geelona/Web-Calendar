@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 interface DataState {
     daysAmount: number;
-    currentCalendarID: string;
+    currentCalendarsID: string[];
 }
 
 const initialState: DataState = {
     daysAmount: 7,
-    currentCalendarID: "",
+    currentCalendarsID: [],
 };
 
 const dataSlice = createSlice({
@@ -17,11 +17,21 @@ const dataSlice = createSlice({
         changeDaysAmount(state, action) {
             state.daysAmount = action.payload;
         },
-        setCurrentCalendarID(state, action) {
-            state.currentCalendarID = action.payload.calendarID;
+        addCurrentCalendarID(state, action) {
+            state.currentCalendarsID.push(action.payload);
+        },
+        removeCurrentCalendarID(state, action) {
+            state.currentCalendarsID = state.currentCalendarsID.filter(
+                (calendar: any) =>
+                    calendar.calendarID !== action.payload.calendarID
+            );
         },
     },
 });
 
-export const { changeDaysAmount, setCurrentCalendarID } = dataSlice.actions;
+export const {
+    changeDaysAmount,
+    addCurrentCalendarID,
+    removeCurrentCalendarID,
+} = dataSlice.actions;
 export default dataSlice.reducer;

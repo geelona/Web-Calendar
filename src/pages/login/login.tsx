@@ -3,8 +3,8 @@ import "./login.scss";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-import Input from "../../components/Input/Input";
-import Button from "../../components/Button/Button";
+import Input from "../../components/common/Input/Input";
+import Button from "../../components/common/Button/Button";
 
 import { ValidateEmail } from "../../utils/validation/emailValidation";
 import { ValidatePassword } from "../../utils/validation/passwordValidation";

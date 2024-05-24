@@ -7,26 +7,30 @@ import { useState } from "react";
 
 import { addCalendar, editCalendar } from "../../services/Calendar";
 
-import Input from "../Input/Input";
-import ColorPicker from "../ColorPicker/ColorPicker";
-import Button from "../Button/Button";
+import Input from "../common/Input/Input";
+import ColorPicker from "../common/ColorPicker/ColorPicker";
+import Button from "../common/Button/Button";
 
 export default function CreateEditCalendar({
     closeModal,
     editMode,
     calendarID,
     calendarTitle,
+    calendarColor,
 }: {
     closeModal: (value: boolean) => void;
     editMode: boolean;
     calendarID: string;
     calendarTitle: string;
+    calendarColor?: string;
 }) {
     const currentUser = useAuth().currentUser;
     const queryClient = useQueryClient();
 
     const [title, setTitle] = useState(calendarTitle);
-    const [color, setColor] = useState("#000000");
+    const [color, setColor] = useState(
+        calendarColor ? calendarColor : "#000000"
+    );
 
     const addCalendarMutation = useMutation({
         mutationFn: () => addCalendar(currentUser.uid, title, color),

@@ -1,6 +1,6 @@
 import "./Links.scss";
 import ShowcaseWrapper from "../../components/ShowcaseWrapper/ShowcaseWrapper";
-import Link from "../../components/Link/Link";
+import Link from "../../components/common/Link/Link";
 
 function Links() {
     return (

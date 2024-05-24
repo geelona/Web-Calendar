@@ -2,9 +2,9 @@ import "./SideBar.scss";
 
 import { useState } from "react";
 
-import Button from "../Button/Button";
-import Datepicker from "../Datepicker/Datepicker";
-import Modal from "../Modal/Modal";
+import Button from "../common/Button/Button";
+import Datepicker from "../common/Datepicker/Datepicker";
+import Modal from "../common/Modal/Modal";
 import CreateEditEvent from "../createEditEvent/createEditEvent";
 import CreateEditCalendar from "../createEditCalendar/createEditCalendar";
 import MyCalendars from "../MyCalendars/MyCalendars";

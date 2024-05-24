@@ -1,5 +1,5 @@
 import "./Textareas.scss";
-import Textarea from "../../components/Textarea/Textarea";
+import Textarea from "../../components/common/Textarea/Textarea";
 import ShowcaseWrapper from "../../components/ShowcaseWrapper/ShowcaseWrapper";
 
 function Textareas() {

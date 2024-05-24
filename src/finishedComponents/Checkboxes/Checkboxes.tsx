@@ -1,5 +1,5 @@
 import "./Checkboxes.scss";
-import Checkbox from "../../components/Checkbox/Checkbox";
+import Checkbox from "../../components/common/Checkbox/Checkbox";
 import ShowcaseWrapper from "../../components/ShowcaseWrapper/ShowcaseWrapper";
 
 function Checkboxes() {

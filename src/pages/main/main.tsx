@@ -1,5 +1,5 @@
 import "./main.scss";
-import CompanyLogo from "../../components/CompanyLogo/CompanyLogo";
+import CompanyLogo from "../../components/common/CompanyLogo/CompanyLogo";
 import { useNavigate } from "react-router-dom";
 
 export default function Main() {

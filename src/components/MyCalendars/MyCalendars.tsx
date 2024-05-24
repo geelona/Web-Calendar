@@ -6,16 +6,20 @@ import { useQuery, useMutation, useQueryClient } from "react-query";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { setCurrentCalendarID } from "../../state/date/dataSlice";
+import {
+    addCurrentCalendarID,
+    removeCurrentCalendarID,
+} from "../../state/date/dataSlice";
 
-import Checkbox from "../Checkbox/Checkbox";
+import Checkbox from "../common/Checkbox/Checkbox";
 import CreateEditCalendar from "../createEditCalendar/createEditCalendar";
-import Modal from "../Modal/Modal";
+import Modal from "../common/Modal/Modal";
 
 export default function MyCalendars() {
-    const currentCalendar = useSelector(
-        (state: any) => state.data.currentCalendarID
+    const currentCalendars = useSelector(
+        (state: any) => state.data.currentCalendarsID
     );
+
     const dispatch = useDispatch();
 
     const queryClient = useQueryClient();
@@ -32,6 +36,26 @@ export default function MyCalendars() {
     function editCalendarHandler(calendarID: string) {
         setEditCalendarID(calendarID);
         setIsEditCalendarModalOpen(true);
+    }
+
+    function onChekedChange(calendarID: string) {
+        const exist = currentCalendars.some(
+            (item: any) => item.calendarID === calendarID
+        );
+
+        if (currentCalendars.length > 1 && exist) {
+            dispatch(
+                removeCurrentCalendarID({
+                    calendarID: calendarID,
+                })
+            );
+        } else if (!exist) {
+            dispatch(
+                addCurrentCalendarID({
+                    calendarID: calendarID,
+                })
+            );
+        }
     }
 
     function closeModal() {
@@ -54,9 +78,9 @@ export default function MyCalendars() {
     useEffect(() => {
         if (calendarsQuery.data) {
             const data = Object.values(calendarsQuery.data);
-            if (data.length > 0 && !currentCalendar) {
+            if (data.length > 0 && currentCalendars.length == 0) {
                 const firstCalendarID = (data[0] as any).id;
-                dispatch(setCurrentCalendarID({ calendarID: firstCalendarID }));
+                dispatch(addCurrentCalendarID({ calendarID: firstCalendarID }));
             }
         }
     }, [calendarsQuery.data]);
@@ -69,7 +93,9 @@ export default function MyCalendars() {
             "An error has occurred: " + (calendarsQuery.error as Error).message
         );
     }
-
+    if (!calendarsQuery.data) {
+        return <></>;
+    }
     const data = Object.values(calendarsQuery.data);
 
     return (
@@ -86,14 +112,10 @@ export default function MyCalendars() {
                             Label={calendar.title}
                             uniqueKey={"calendar-" + calendar.id}
                             color={calendar.color}
-                            checkedValue={currentCalendar == calendar.id}
-                            onChange={() =>
-                                dispatch(
-                                    setCurrentCalendarID({
-                                        calendarID: calendar.id,
-                                    })
-                                )
-                            }
+                            checkedValue={currentCalendars.some(
+                                (item: any) => item.calendarID === calendar.id
+                            )}
+                            onChange={() => onChekedChange(calendar.id)}
                         />
                         <div className="calendar__tools">
                             <button
@@ -127,6 +149,7 @@ export default function MyCalendars() {
                                             editMode={true}
                                             calendarID={calendar.id}
                                             calendarTitle={calendar.title}
+                                            calendarColor={calendar.color}
                                         />
                                     </Modal>
                                 )}

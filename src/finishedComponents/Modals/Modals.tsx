@@ -1,5 +1,5 @@
 import "./Modals.scss";
-import Modal from "../../components/Modal/Modal";
+import Modal from "../../components/common/Modal/Modal";
 import ShowcaseWrapper from "../../components/ShowcaseWrapper/ShowcaseWrapper";
 
 function Modals() {

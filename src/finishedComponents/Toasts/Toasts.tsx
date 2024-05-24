@@ -1,5 +1,5 @@
 import "./Toasts.scss";
-import Toast from "../../components/Toast/Toast";
+import Toast from "../../components/common/Toast/Toast";
 import ShowcaseWrapper from "../../components/ShowcaseWrapper/ShowcaseWrapper";
 
 function Toasts() {

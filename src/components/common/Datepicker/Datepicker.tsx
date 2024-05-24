@@ -6,9 +6,9 @@ import {
     previousMonth,
     nextMonth,
     updateChoosenDate,
-} from "../../state/date/dateSlice";
+} from "../../../state/date/dateSlice";
 
-import { getMonthNameByNum } from "../../utils/GetMonthNameByNum";
+import { getMonthNameByNum } from "../../../utils/GetMonthNameByNum";
 
 function Datepicker({}) {
     const dispatch = useDispatch();

@@ -1,5 +1,5 @@
 import "./SelectMenus.scss";
-import SelectMenu from "../../components/SelectMenu/SelectMenu";
+import SelectMenu from "../../components/common/SelectMenu/SelectMenu";
 import ShowcaseWrapper from "../../components/ShowcaseWrapper/ShowcaseWrapper";
 
 function SelectMenus() {

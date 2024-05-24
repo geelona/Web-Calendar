@@ -1,5 +1,5 @@
 import "./Datepicker.scss";
-import Datepicker from "../../components/Datepicker/Datepicker";
+import Datepicker from "../../components/common/Datepicker/Datepicker";
 import ShowcaseWrapper from "../../components/ShowcaseWrapper/ShowcaseWrapper";
 
 function Datepickers() {
