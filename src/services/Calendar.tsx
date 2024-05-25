@@ -6,14 +6,21 @@ const db = getDatabase();
 export async function addCalendar(
     userId: string,
     title: string,
-    color: string
+    color: string,
+    id?: string
 ) {
-    const calendarRef = push(ref(db, `users/${userId}/calendars`));
+    let calendarRef;
+    if (id === "default") {
+        calendarRef = ref(db, `users/${userId}/calendars/default`);
+    } else {
+        calendarRef = push(ref(db, `users/${userId}/calendars`));
+    }
     try {
+        const calendarID = id ? id : calendarRef.key;
         await set(calendarRef, {
             title,
             color,
-            id: calendarRef.key,
+            id: calendarID,
         });
     } catch (error) {
         console.error("Error adding calendar:", error);
@@ -24,7 +31,11 @@ export async function addCalendar(
 export async function getCalendars(userId: string) {
     const calendarsRef = ref(db, `users/${userId}/calendars`);
     try {
-        const snapshot = await get(calendarsRef);
+        let snapshot = await get(calendarsRef);
+        if (!snapshot.exists()) {
+            addCalendar(userId, "Default", "#00FFFF", "default");
+            snapshot = await get(calendarsRef);
+        }
         return snapshot.val();
     } catch (error) {
         console.error("Error getting calendars:", error);
@@ -48,7 +59,7 @@ export async function editCalendar(
     title: string,
     color: string
 ) {
-    const calendarRef = ref(db, `users/${userId}/calendars/${calendarID}`);
+    let calendarRef = ref(db, `users/${userId}/calendars/${calendarID}`);
     try {
         await set(calendarRef, {
             title,

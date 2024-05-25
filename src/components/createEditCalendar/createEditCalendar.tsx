@@ -24,6 +24,7 @@ export default function CreateEditCalendar({
     calendarTitle: string;
     calendarColor?: string;
 }) {
+    console.log(calendarID === "default");
     const currentUser = useAuth().currentUser;
     const queryClient = useQueryClient();
 
@@ -75,12 +76,14 @@ export default function CreateEditCalendar({
                     setValue={setTitle}
                 />
             </div>
-            <div className="color">
-                <div className="color__img-container">
-                    <img src="/public/components/createEditCalendar/color-icon.png" />
+            {calendarID !== "default" && (
+                <div className="color">
+                    <div className="color__img-container">
+                        <img src="/public/components/createEditCalendar/color-icon.png" />
+                    </div>
+                    <ColorPicker changeColor={setColor} />
                 </div>
-                <ColorPicker changeColor={setColor} />
-            </div>
+            )}
             <div className="button-wrapper">
                 <Button
                     label="Save"

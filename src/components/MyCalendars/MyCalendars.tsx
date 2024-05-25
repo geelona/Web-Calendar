@@ -93,9 +93,11 @@ export default function MyCalendars() {
             "An error has occurred: " + (calendarsQuery.error as Error).message
         );
     }
+
     if (!calendarsQuery.data) {
-        return <></>;
+        return "";
     }
+
     const data = Object.values(calendarsQuery.data);
 
     return (
@@ -118,14 +120,16 @@ export default function MyCalendars() {
                             onChange={() => onChekedChange(calendar.id)}
                         />
                         <div className="calendar__tools">
-                            <button
-                                className="calendar__tools__remove-item"
-                                onClick={() =>
-                                    deleteCalendarHandler(calendar.id)
-                                }
-                            >
-                                <img src="/components/MyCalendars/bin.png" />
-                            </button>
+                            {calendar.id !== "default" && (
+                                <button
+                                    className="calendar__tools__remove-item"
+                                    onClick={() =>
+                                        deleteCalendarHandler(calendar.id)
+                                    }
+                                >
+                                    <img src="/components/MyCalendars/bin.png" />
+                                </button>
+                            )}
                             <button
                                 className="calendar__tools__edit-item"
                                 onClick={() => editCalendarHandler(calendar.id)}
