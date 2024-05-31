@@ -9,6 +9,7 @@ function Checkbox({
     color,
     checkedValue,
     onChange,
+    fontSize,
 }: {
     LabelOn: boolean;
     Label: string;
@@ -16,6 +17,7 @@ function Checkbox({
     color: string;
     checkedValue: boolean;
     onChange: () => void;
+    fontSize?: string;
 }) {
     const [isChecked, setIsChecked] = useState(false);
 
@@ -51,7 +53,14 @@ function Checkbox({
                     style={checkmarkStyle}
                 />
             </div>
-            {LabelOn && <label htmlFor={uniqueKey}>{Label}</label>}
+            {LabelOn && (
+                <label
+                    style={{ fontSize: fontSize ? fontSize : "" }}
+                    htmlFor={uniqueKey}
+                >
+                    {Label}
+                </label>
+            )}
         </div>
     );
 }

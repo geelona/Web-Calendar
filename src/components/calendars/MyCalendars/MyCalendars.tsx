@@ -1,7 +1,7 @@
 import "./MyCalendars.scss";
 
-import { getCalendars, deleteCalendar } from "../../services/Calendar";
-import { useAuth } from "../../contexts/AuthContext";
+import { getCalendars, deleteCalendar } from "../../../services/Calendar";
+import { useAuth } from "../../../contexts/AuthContext";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,11 +9,12 @@ import { useSelector, useDispatch } from "react-redux";
 import {
     addCurrentCalendarID,
     removeCurrentCalendarID,
-} from "../../state/date/dataSlice";
+} from "../../../state/date/dataSlice";
 
-import Checkbox from "../common/Checkbox/Checkbox";
+import Checkbox from "../../common/Checkbox/Checkbox";
+import DeleteCalendar from "../deleteCalendar/deleteCalendar";
 import CreateEditCalendar from "../createEditCalendar/createEditCalendar";
-import Modal from "../common/Modal/Modal";
+import Modal from "../../common/Modal/Modal";
 
 export default function MyCalendars() {
     const currentCalendars = useSelector(
@@ -29,8 +30,13 @@ export default function MyCalendars() {
         useState(false);
     const [editCalendarID, setEditCalendarID] = useState("");
 
+    const [isTryingToDelete, setIsTryingToDelete] = useState(false);
+    const [CalendarToDelete, setCalendarToDelete] = useState("");
+
     function deleteCalendarHandler(calendarID: string) {
-        deleteCalendarMutation.mutate(calendarID);
+        // deleteCalendarMutation.mutate(calendarID);
+        setIsTryingToDelete(true);
+        setCalendarToDelete(calendarID);
     }
 
     function editCalendarHandler(calendarID: string) {
@@ -138,6 +144,29 @@ export default function MyCalendars() {
                             </button>
                         </div>
                         <div className="modal">
+                            {isTryingToDelete &&
+                                CalendarToDelete == calendar.id && (
+                                    <Modal
+                                        title="Delete calendar"
+                                        onClose={() =>
+                                            setIsTryingToDelete(false)
+                                        }
+                                        maxWidth="sm"
+                                        className="delete-calendar-modal"
+                                    >
+                                        <DeleteCalendar
+                                            onDelete={() =>
+                                                deleteCalendarMutation.mutate(
+                                                    calendar.id
+                                                )
+                                            }
+                                            setIsTryingToDelete={
+                                                setIsTryingToDelete
+                                            }
+                                            calendarTitle={calendar.title}
+                                        />
+                                    </Modal>
+                                )}
                             {isEditCalendarModalOpen &&
                                 calendar.id == editCalendarID && (
                                     <Modal

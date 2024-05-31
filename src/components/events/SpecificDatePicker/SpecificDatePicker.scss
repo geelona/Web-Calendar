@@ -1,0 +1,44 @@
+.specific-date-picker-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    position: relative;
+
+    & > label {
+        font-size: 0.6vw;
+        font-weight: bold;
+    }
+    & > button {
+        font-size: 0.8vw;
+        text-align: start;
+        padding: 0.4vw 0vw;
+        outline: none;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        border-bottom: 1px solid #000000;
+    }
+
+    & > img {
+        width: 0.8vw;
+        height: 0.4vw;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(50%);
+        pointer-events: none;
+    }
+
+    & > .arrow-rotated {
+        transform: rotate(180deg);
+    }
+
+    & > .datepicker-modal {
+        position: absolute;
+        left: 0;
+        top: 2.75vw;
+        border: 0.1vw solid #dee0e5;
+        border-radius: 0.5vw;
+    }
+}

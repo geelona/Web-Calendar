@@ -1,0 +1,17 @@
+.calendar-option__in-create-event {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+
+    .calendar-option__in-create-event__color {
+        min-width: 0.75vw;
+        min-height: 0.75vw;
+        border-radius: 0.25vw;
+        pointer-events: none;
+    }
+
+    .calendar-option__in-create-event__title {
+        pointer-events: none;
+        margin: 0;
+    }
+}

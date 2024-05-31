@@ -5,9 +5,9 @@ import { useState } from "react";
 import Button from "../common/Button/Button";
 import Datepicker from "../common/Datepicker/Datepicker";
 import Modal from "../common/Modal/Modal";
-import CreateEditEvent from "../createEditEvent/createEditEvent";
-import CreateEditCalendar from "../createEditCalendar/createEditCalendar";
-import MyCalendars from "../MyCalendars/MyCalendars";
+import CreateEditEvent from "../events/createEditEvent/createEditEvent";
+import CreateEditCalendar from "../calendars/createEditCalendar/createEditCalendar";
+import MyCalendars from "../calendars/MyCalendars/MyCalendars";
 
 export default function SideBar() {
     const [createEventBoolean, setCreateEventBoolean] = useState(false);
@@ -39,7 +39,7 @@ export default function SideBar() {
                 customIcon="/components/SideBar/add.png"
                 fullWidth={true}
             />
-            <Datepicker />
+            <Datepicker realTimeCalendar={true} />
             <div className="calendars">
                 <header>
                     <p>My calendars</p>
@@ -76,6 +76,7 @@ export default function SideBar() {
                         <CreateEditCalendar
                             closeModal={removeCreateCalendarHandler}
                             editMode={false}
+                            calendarTitle=""
                         />
                     </Modal>
                 )}

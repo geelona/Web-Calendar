@@ -48,6 +48,12 @@ const dateSlice = createSlice({
             state.choosenMonth = action.payload[1];
             state.choosenYear = action.payload[2];
         },
+
+        setTodaysDate(state) {
+            state.currentDay = new Date().getDate();
+            state.currentMonth = new Date().getMonth();
+            state.currentYear = new Date().getFullYear();
+        },
     },
 });
 
@@ -56,5 +62,6 @@ export const {
     nextMonth,
     updateCurrentDate,
     updateChoosenDate,
+    setTodaysDate,
 } = dateSlice.actions;
 export default dateSlice.reducer;

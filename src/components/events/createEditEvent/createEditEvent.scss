@@ -1,0 +1,57 @@
+.create-edit-event-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vw;
+    & > div {
+        display: flex;
+        align-items: center;
+        gap: 1vw;
+
+        & > img {
+            position: relative;
+            align-self: flex-start;
+            top: 1vw;
+            height: 1vw;
+        }
+    }
+
+    & > .date {
+        display: flex;
+        position: relative;
+        z-index: 100;
+
+        & > .date__date {
+            flex: 1.5;
+            margin-right: 0.5vw;
+        }
+
+        & > .date__time {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 0.5vw;
+
+            & > span {
+                position: relative;
+                top: 0.275vw;
+            }
+        }
+    }
+
+    & > .when-to-send {
+        margin-left: 2vw;
+        display: flex;
+        align-items: center;
+        z-index: 10;
+
+        & > .checkbox {
+            position: relative;
+            top: 0.25vw;
+        }
+    }
+
+    & > .submit {
+        align-self: flex-end;
+        width: 5.5vw;
+    }
+}

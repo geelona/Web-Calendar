@@ -8,7 +8,11 @@ import { getAvatarColor } from "../../utils/AvatarColor";
 
 import { logOutHandler } from "../../utils/LogOut";
 
-import { previousMonth, nextMonth } from "../../state/date/dateSlice";
+import {
+    previousMonth,
+    nextMonth,
+    setTodaysDate,
+} from "../../state/date/dateSlice";
 
 import { getMonthNameByNum } from "../../utils/GetMonthNameByNum";
 
@@ -44,9 +48,7 @@ export default function Header() {
                     withIcon={false}
                     disabled={false}
                     onClick={() => {
-                        alert(
-                            "Should be added a function to show today's tasks"
-                        );
+                        dispatch(setTodaysDate());
                     }}
                     fontSize={0.8}
                 />

@@ -1,15 +1,23 @@
-import propTypes from "prop-types";
+import propTypes, { object } from "prop-types";
 import "./SelectMenu.scss";
-import { useRef } from "react";
+import { ReactNode, useRef } from "react";
 
 function SelectMenu({
     label,
     options,
     selectDefault,
+    fullWidth,
+    setValue,
+    width,
+    ifCalendarOptions,
 }: {
     label: string;
-    options: string[];
+    options: ReactNode[];
     selectDefault: string;
+    fullWidth?: true;
+    setValue?: (value: string) => void;
+    width?: string;
+    ifCalendarOptions?: boolean;
 }) {
     const selectRef = useRef<HTMLButtonElement>(null);
     const optionsContainer = useRef<HTMLDivElement>(null);
@@ -21,9 +29,16 @@ function SelectMenu({
     const handleOptionClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         clearActive();
         (event.target as HTMLButtonElement).classList.add("option--selected");
-        selectRef.current!.innerText = (
-            event.target as HTMLButtonElement
-        ).innerText;
+        const firstChild = event.currentTarget.firstChild as HTMLElement; // Cast firstChild to HTMLElement
+        selectRef.current!.innerHTML = firstChild.outerHTML;
+        if (setValue) {
+            if (ifCalendarOptions) {
+                const calendarID = firstChild.getAttribute("calendar-id");
+                setValue(calendarID!);
+            } else {
+                setValue((event.target as HTMLButtonElement).innerText);
+            }
+        }
         handleSelect();
     };
 
@@ -34,24 +49,33 @@ function SelectMenu({
         });
     };
 
+    function renderOptions() {
+        return options.map((option, index) => (
+            <button key={index} className="option" onClick={handleOptionClick}>
+                {option}
+            </button>
+        ));
+    }
+
     return (
-        <div className="select-menu-container">
+        <div
+            className="select-menu-container"
+            style={
+                width
+                    ? { width: width }
+                    : fullWidth
+                      ? { width: "100%" }
+                      : undefined
+            }
+        >
             <label>{label}</label>
             <button ref={selectRef} className="select" onClick={handleSelect}>
                 {selectDefault}
             </button>
             <div ref={optionsContainer} className="options-container">
-                {options.map((option, index) => {
-                    return (
-                        <button
-                            key={index}
-                            className="option"
-                            onClick={handleOptionClick}
-                        >
-                            {option}
-                        </button>
-                    );
-                })}
+                <div className="options-container__overflow-container">
+                    {renderOptions()}
+                </div>
             </div>
         </div>
     );
@@ -59,7 +83,7 @@ function SelectMenu({
 
 SelectMenu.propTypes = {
     label: propTypes.string.isRequired,
-    options: propTypes.arrayOf(propTypes.string).isRequired,
+    options: propTypes.arrayOf(propTypes.node).isRequired,
     selectDefault: propTypes.string.isRequired,
 };
 

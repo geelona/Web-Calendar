@@ -5,6 +5,7 @@
 
     & > .calendars {
         background: white;
+        position: relative;
         box-shadow: 0 0.4vw 0.4vw 0 #0000001a;
         border-radius: 0.5vw;
         padding: 1vw;
@@ -61,28 +62,28 @@
     }
 
     & > .modals {
-        position: fixed;
-        top: 50%;
-        left: 57.5%;
-        transform: translate(-50%, -50%);
+        position: absolute;
+        top: 0;
+        left: 0;
         z-index: 10;
         display: flex;
         flex-direction: column;
         align-items: center;
-        background: red;
 
         & > .create-edit-event-modal {
             z-index: 10;
             position: absolute;
-            width: 30vw;
-            transform: translateY(-50%);
+            top: 12.5vw;
+            left: 40vw;
+            width: 32vw;
         }
 
         & > .create-edit-calendar-modal {
             z-index: 10;
             position: absolute;
+            top: 26.5vw;
+            left: 16.5vw;
             width: 15vw;
-            transform: translateY(-50%);
         }
     }
 }

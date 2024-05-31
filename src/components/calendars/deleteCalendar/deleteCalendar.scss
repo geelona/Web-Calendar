@@ -1,0 +1,22 @@
+.delete-calendar-modal__content {
+    max-width: 27vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+
+    & > p {
+        margin: 0;
+        font-size: 1rem;
+
+        & > span {
+            font-weight: 700;
+        }
+    }
+
+    .delete-calendar-modal__content__buttons {
+        display: flex;
+        gap: 0.5vw;
+        width: 12vw;
+        align-self: flex-end;
+    }
+}

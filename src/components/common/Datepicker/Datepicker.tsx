@@ -1,5 +1,5 @@
 import "./Datepicker.scss";
-import { useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
@@ -10,7 +10,13 @@ import {
 
 import { getMonthNameByNum } from "../../../utils/GetMonthNameByNum";
 
-function Datepicker({}) {
+function Datepicker({
+    realTimeCalendar,
+    setValue,
+}: {
+    realTimeCalendar: boolean;
+    setValue?: (value: number[]) => void;
+}) {
     const dispatch = useDispatch();
     const daysRef = useRef<HTMLDivElement>(null);
 
@@ -18,15 +24,59 @@ function Datepicker({}) {
     const currentMonth = useSelector((state: any) => state.date.currentMonth);
     const currentYear = useSelector((state: any) => state.date.currentYear);
 
+    const [currentDayTemp, setCurrentDayTemp] = useState(currentDay);
+    const [currentMonthTemp, setCurrentMonthTemp] = useState(currentMonth);
+    const [currentYearTemp, setCurrentYearTemp] = useState(currentYear);
+
     const choosenDay = useSelector((state: any) => state.date.choosenDay);
     const choosenMonth = useSelector((state: any) => state.date.choosenMonth);
     const choosenYear = useSelector((state: any) => state.date.choosenYear);
 
-    const start = new Date(currentYear, currentMonth, 1).getDay();
-    const endDate = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const start = new Date(
+        realTimeCalendar ? currentYear : currentYearTemp,
+        realTimeCalendar ? currentMonth : currentMonthTemp,
+        1
+    ).getDay();
+    const endDate = new Date(
+        realTimeCalendar ? currentYear : currentYearTemp,
+        realTimeCalendar ? currentMonth + 1 : currentMonthTemp + 1,
+        0
+    ).getDate();
 
-    const end = new Date(currentYear, currentMonth, endDate).getDay();
-    const endDatePrev = new Date(currentYear, currentMonth, 0).getDate();
+    const end = new Date(
+        realTimeCalendar ? currentYear : currentYearTemp,
+        realTimeCalendar ? currentMonth : currentMonthTemp,
+        endDate
+    ).getDay();
+    const endDatePrev = new Date(
+        realTimeCalendar ? currentYear : currentYearTemp,
+        realTimeCalendar ? currentMonth : currentMonthTemp,
+        0
+    ).getDate();
+
+    function notRealTimeNextMonth() {
+        if (currentMonthTemp === 11) {
+            setCurrentMonthTemp(0);
+            setCurrentYearTemp(currentYearTemp + 1);
+        } else {
+            setCurrentMonthTemp(currentMonthTemp + 1);
+        }
+    }
+    function notRealTimePreviousMonth() {
+        if (currentMonthTemp === 0) {
+            setCurrentMonthTemp(11);
+            setCurrentYearTemp(currentYearTemp - 1);
+        } else {
+            setCurrentMonthTemp(currentMonthTemp - 1);
+        }
+    }
+
+    function titleGenerator() {
+        if (!realTimeCalendar) {
+            return `${getMonthNameByNum(currentMonthTemp)} ${currentYearTemp}`;
+        }
+        return `${getMonthNameByNum(currentMonth)} ${currentYear}`;
+    }
 
     function clickDayHandler(e: any) {
         if (
@@ -35,13 +85,24 @@ function Datepicker({}) {
         )
             return;
 
-        let prevDay = daysRef.current?.querySelector(".active");
-        if (prevDay) prevDay.classList.remove("active");
+        if (realTimeCalendar) {
+            let prevDay = daysRef.current?.querySelector(".active");
+            if (prevDay) prevDay.classList.remove("active");
 
-        let day = e.target;
-        day.classList.add("active");
-        const tempActiveDay = [day.textContent, currentMonth, currentYear];
-        dispatch(updateChoosenDate(tempActiveDay));
+            let day = e.target;
+            day.classList.add("active");
+            const tempActiveDay = [day.textContent, currentMonth, currentYear];
+            dispatch(updateChoosenDate(tempActiveDay));
+        } else {
+            setCurrentDayTemp(+e.target.textContent);
+
+            const tempActiveDay = [
+                +e.target.textContent,
+                currentMonth,
+                currentYear,
+            ];
+            setValue && setValue(tempActiveDay);
+        }
     }
 
     function renderDays() {
@@ -57,9 +118,11 @@ function Datepicker({}) {
         }
         for (let i = 1; i <= endDate; i++) {
             if (
-                currentDay == i &&
-                currentMonth === new Date().getMonth() &&
-                currentYear === new Date().getFullYear()
+                (realTimeCalendar ? currentDay : currentDayTemp) == i &&
+                (realTimeCalendar ? currentMonth : currentMonthTemp) ===
+                    new Date().getMonth() &&
+                (realTimeCalendar ? currentYear : currentYearTemp) ===
+                    new Date().getFullYear()
             ) {
                 daysRef.current?.insertAdjacentHTML(
                     "beforeend",
@@ -68,7 +131,8 @@ function Datepicker({}) {
             } else if (
                 i == choosenDay &&
                 choosenMonth == currentMonth &&
-                choosenYear == currentYear
+                choosenYear == currentYear &&
+                realTimeCalendar
             ) {
                 daysRef.current?.insertAdjacentHTML(
                     "beforeend",
@@ -91,24 +155,30 @@ function Datepicker({}) {
 
     useEffect(() => {
         renderDays();
-    }, [currentMonth]);
+    }, [currentMonth, currentMonthTemp]);
 
     return (
         <div className="datepicker-container">
             <header>
-                <div className="currentDateTitle">
-                    {getMonthNameByNum(currentMonth)} {currentYear}
-                </div>
+                <div className="currentDateTitle">{titleGenerator()}</div>
                 <nav>
                     <div
                         className="prev"
                         onClick={() => {
+                            if (!realTimeCalendar) {
+                                notRealTimePreviousMonth();
+                                return;
+                            }
                             dispatch(previousMonth());
                         }}
                     ></div>
                     <div
                         className="next"
                         onClick={() => {
+                            if (!realTimeCalendar) {
+                                notRealTimeNextMonth();
+                                return;
+                            }
                             dispatch(nextMonth());
                         }}
                     ></div>

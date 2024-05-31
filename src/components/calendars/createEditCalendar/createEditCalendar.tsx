@@ -2,14 +2,14 @@ import "./createEditCalendar.scss";
 
 import { useMutation, useQueryClient } from "react-query";
 
-import { useAuth } from "../../contexts/AuthContext";
+import { useAuth } from "../../../contexts/AuthContext";
 import { useState } from "react";
 
-import { addCalendar, editCalendar } from "../../services/Calendar";
+import { addCalendar, editCalendar } from "../../../services/Calendar";
 
-import Input from "../common/Input/Input";
-import ColorPicker from "../common/ColorPicker/ColorPicker";
-import Button from "../common/Button/Button";
+import Input from "../../common/Input/Input";
+import ColorPicker from "../../common/ColorPicker/ColorPicker";
+import Button from "../../common/Button/Button";
 
 export default function CreateEditCalendar({
     closeModal,
@@ -20,11 +20,10 @@ export default function CreateEditCalendar({
 }: {
     closeModal: (value: boolean) => void;
     editMode: boolean;
-    calendarID: string;
+    calendarID?: string;
     calendarTitle: string;
     calendarColor?: string;
 }) {
-    console.log(calendarID === "default");
     const currentUser = useAuth().currentUser;
     const queryClient = useQueryClient();
 
@@ -42,7 +41,12 @@ export default function CreateEditCalendar({
 
     const editCalendarMutation = useMutation({
         mutationFn: () =>
-            editCalendar(currentUser.uid, calendarID, title, color),
+            editCalendar(
+                currentUser.uid,
+                calendarID ? calendarID : "",
+                title,
+                color
+            ),
         onSuccess: () => {
             queryClient.invalidateQueries("calendars");
         },

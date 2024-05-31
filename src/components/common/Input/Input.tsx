@@ -11,6 +11,7 @@ function Input({
     Disabled,
     value,
     setValue,
+    fullwidth,
 }: {
     FieldName: string;
     FieldType: string;
@@ -20,6 +21,7 @@ function Input({
     Disabled: boolean;
     value?: string;
     setValue?: (value: string) => void;
+    fullwidth?: boolean;
 }) {
     const InputRef = useRef<HTMLInputElement>(null);
     const eyeIconRef = useRef<HTMLImageElement>(null);
@@ -44,7 +46,7 @@ function Input({
             >
                 {FieldName}
             </label>
-            <div>
+            <div style={{ minWidth: fullwidth ? "100%" : "" }}>
                 <input
                     defaultValue={value}
                     onChange={(e) => setValue && setValue(e.target.value)}
@@ -54,11 +56,11 @@ function Input({
                     placeholder={Placeholder}
                     className={IsErrored ? "error-input" : ""}
                     disabled={Disabled}
-                    style={
-                        InputRef.current?.type === "password"
+                    style={{
+                        ...(InputRef.current?.type === "password"
                             ? { paddingRight: "1.5vw" }
-                            : {}
-                    }
+                            : {}),
+                    }}
                 />
                 {FieldType === "password" && (
                     <button
