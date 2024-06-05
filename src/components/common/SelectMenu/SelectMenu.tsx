@@ -1,4 +1,4 @@
-import propTypes, { object } from "prop-types";
+import propTypes from "prop-types";
 import "./SelectMenu.scss";
 import { ReactNode, useRef } from "react";
 
@@ -10,6 +10,7 @@ function SelectMenu({
     setValue,
     width,
     ifCalendarOptions,
+    DefaultCalendarId,
 }: {
     label: string;
     options: ReactNode[];
@@ -18,7 +19,12 @@ function SelectMenu({
     setValue?: (value: string) => void;
     width?: string;
     ifCalendarOptions?: boolean;
+    DefaultCalendarId?: string;
 }) {
+    const defaultOption = options.find((option) => {
+        return (option as React.ReactElement).key === DefaultCalendarId;
+    });
+
     const selectRef = useRef<HTMLButtonElement>(null);
     const optionsContainer = useRef<HTMLDivElement>(null);
 
@@ -29,7 +35,7 @@ function SelectMenu({
     const handleOptionClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         clearActive();
         (event.target as HTMLButtonElement).classList.add("option--selected");
-        const firstChild = event.currentTarget.firstChild as HTMLElement; // Cast firstChild to HTMLElement
+        const firstChild = event.currentTarget.firstChild as HTMLElement;
         selectRef.current!.innerHTML = firstChild.outerHTML;
         if (setValue) {
             if (ifCalendarOptions) {
@@ -70,7 +76,7 @@ function SelectMenu({
         >
             <label>{label}</label>
             <button ref={selectRef} className="select" onClick={handleSelect}>
-                {selectDefault}
+                {DefaultCalendarId ? defaultOption : selectDefault}
             </button>
             <div ref={optionsContainer} className="options-container">
                 <div className="options-container__overflow-container">

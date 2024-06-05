@@ -14,7 +14,7 @@ import { getCalendars } from "../../../services/Calendar";
 
 import { CalendarOptionsForCreateEvent } from "../calendarOptionsForCreateEvent/calendarOptionsForCreateEvent";
 
-import { addEvent } from "../../../services/Event";
+import { addEvent, editEvent } from "../../../services/Event";
 
 import Input from "../../common/Input/Input";
 import SelectMenu from "../../common/SelectMenu/SelectMenu";
@@ -23,24 +23,49 @@ import Textarea from "../../common/Textarea/Textarea";
 import Button from "../../common/Button/Button";
 import SpecificDatePicker from "../SpecificDatePicker/SpecificDatePicker";
 
-export default function CreateEditEvent() {
+export default function CreateEditEvent({
+    close,
+    isEditMode,
+    event,
+}: {
+    close: () => void;
+    isEditMode?: boolean;
+    event?: any;
+}) {
     const currentUser = useAuth().currentUser;
     const queryClient = useQueryClient();
+
+    const prevCalendar = isEditMode ? event.calendar : "";
 
     const [calendarsData, setCalendarsData] = useState([] as any);
     const [submitDisabled, setSubmitDisabled] = useState(true);
 
-    const [title, setTitle] = useState("");
-    const [date, setDate] = useState([] as number[]);
-    const [startTime, setStartTime] = useState(avalebleTime[0]);
-    const [endTime, setEndTime] = useState(avalebleTime[0]);
-    const [allDay, setAllDay] = useState(false);
-    const [repeat, setRepeat] = useState(repeatOptions[0]);
-    const [calendar, setCalendar] = useState("");
-    const [description, setDescription] = useState("");
+    const [title, setTitle] = useState(isEditMode ? event.title : "");
+    const [date, setDate] = useState(
+        isEditMode ? event.date : ([] as number[])
+    );
+    const [startTime, setStartTime] = useState(
+        isEditMode ? event.startTime : avalebleTime[0]
+    );
+    const [endTime, setEndTime] = useState(
+        isEditMode ? event.endTime : avalebleTime[0]
+    );
+    const [allDay, setAllDay] = useState(isEditMode ? event.isAllDay : false);
+    const [repeat, setRepeat] = useState(
+        isEditMode ? event.repeat : repeatOptions[0]
+    );
+    const [calendar, setCalendar] = useState(isEditMode ? event.calendar : "");
+    const [description, setDescription] = useState(
+        isEditMode ? event.description : ""
+    );
 
     function submitEvent() {
-        addEventMutation.mutate();
+        if (isEditMode) {
+            editEventMutation.mutate();
+        } else {
+            addEventMutation.mutate();
+        }
+        close();
     }
 
     const addEventMutation = useMutation({
@@ -58,6 +83,28 @@ export default function CreateEditEvent() {
             }),
         onSuccess: () => {
             queryClient.invalidateQueries("events");
+            queryClient.invalidateQueries("calendars");
+        },
+    });
+
+    const editEventMutation = useMutation({
+        mutationFn: () =>
+            editEvent({
+                userId: currentUser.uid,
+                eventId: event.id,
+                title,
+                date,
+                startTime,
+                endTime,
+                isAllDay: allDay,
+                repeat,
+                calendar,
+                description,
+                prevCalendar,
+            }),
+        onSuccess: () => {
+            queryClient.invalidateQueries("events");
+            queryClient.invalidateQueries("calendars");
         },
     });
 
@@ -98,7 +145,10 @@ export default function CreateEditEvent() {
             <div className="date">
                 <img src="/components/createEditEvent/time.png" />
                 <div className="date__date">
-                    <SpecificDatePicker setDate={setDate} />
+                    <SpecificDatePicker
+                        setDate={setDate}
+                        date={isEditMode ? event.date : []}
+                    />
                 </div>
 
                 <div className="date__time">
@@ -149,7 +199,7 @@ export default function CreateEditEvent() {
                     options={repeatOptions.map((option, index) => (
                         <div key={index}>{option}</div>
                     ))}
-                    selectDefault="Does not repeat"
+                    selectDefault={repeat}
                     setValue={setRepeat}
                     width="11vw"
                 />
@@ -163,6 +213,7 @@ export default function CreateEditEvent() {
                     fullWidth={true}
                     setValue={setCalendar}
                     ifCalendarOptions={true}
+                    DefaultCalendarId={event ? event.calendar : ""}
                 />
             </div>
             <div className="description">

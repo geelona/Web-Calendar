@@ -1,0 +1,85 @@
+.cell__event-container {
+    position: relative;
+    top: var(--event-start-time-offset);
+    height: 0;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--event-height);
+        background: var(--calendar-color);
+        opacity: 0.25;
+        border-radius: 0.5vw;
+        pointer-events: none;
+        z-index: 3;
+    }
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--event-height);
+        border-left: var(--calendar-color) 0.25vw solid;
+        border-radius: 0.5vw;
+        pointer-events: none;
+        z-index: 3;
+    }
+
+    & > .cell__event-container__time-data {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 0;
+        padding-left: 0.5vw;
+        border: none;
+        background: white;
+        outline: none;
+        text-align: start;
+        height: 2vw;
+        width: 100%;
+        overflow: scroll;
+        cursor: pointer;
+        border-radius: 0.5vw;
+        z-index: 1;
+
+        &:hover {
+            background: darken(white, 20%);
+        }
+
+        &:active {
+            background: darken(white, 30%);
+        }
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        & > h1,
+        & > p {
+            margin: 0;
+            pointer-events: none;
+        }
+
+        & > h1 {
+            font-size: 0.8vw;
+            font-weight: 400;
+        }
+        & > p {
+            font-size: 0.6vw;
+        }
+    }
+
+    & > .cell__event-container__modals {
+        & > .cell__event-container__modals__modal {
+            z-index: 15;
+            position: absolute;
+            width: 32vw;
+            right: auto;
+        }
+    }
+}

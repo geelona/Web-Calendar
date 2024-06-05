@@ -7,6 +7,15 @@
         position: relative;
         background: white;
         margin-bottom: 0.1vw;
+
+        & > .main-grid__data__cells__cell__event {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+            height: 100%;
+            max-width: 10vw;
+            position: relative;
+            z-index: 1;
+        }
     }
 }
 
@@ -51,6 +60,10 @@
 
         &:nth-last-child(-n + 1) {
             margin-bottom: 0;
+        }
+
+        & > .main-grid__data__cells__cell__event {
+            max-width: 100%;
         }
     }
 }

@@ -1,0 +1,18 @@
+.delete-menu-container {
+    width: 27vw;
+
+    & > p {
+        margin: 0;
+        font-size: 1vw;
+
+        & > span {
+            font-weight: bold;
+        }
+    }
+
+    & > .buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5vw;
+    }
+}

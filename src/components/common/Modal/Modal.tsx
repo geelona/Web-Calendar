@@ -41,7 +41,7 @@ Modal.propTypes = {
     title: propTypes.string.isRequired,
     children: propTypes.node.isRequired,
     onClose: propTypes.func.isRequired,
-    maxWidth: propTypes.string.isRequired,
+    maxWidth: propTypes.string,
     className: propTypes.string,
 };
 

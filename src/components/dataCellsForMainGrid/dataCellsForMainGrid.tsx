@@ -1,11 +1,24 @@
 import "./dataCellsForMainGrid.scss";
+
 import { useSelector } from "react-redux";
 import { useAuth } from "../../contexts/AuthContext";
 import { useEffect, useState } from "react";
-import { current } from "@reduxjs/toolkit";
+import { useQuery } from "react-query";
+
+import { getCalendars } from "../../services/Calendar";
+
+import { convertTo24Hour } from "../../utils/convertTo24Hour";
+
+import RenderEvent from "../events/renderEvent/renderEvent";
 
 export default function DataCellsForMainGrid() {
     const { currentUser } = useAuth();
+
+    const [calendarsData, setCalendarsData] = useState([] as any);
+
+    const currentCalendarsID = useSelector(
+        (state: any) => state.data.currentCalendarsID
+    );
 
     const daysAmount = useSelector((state: any) => state.data.daysAmount);
 
@@ -24,7 +37,7 @@ export default function DataCellsForMainGrid() {
             year: number
         ): [number, number, number, string][] => {
             if (daysAmount === 1) {
-                return [[day, month, year, "12:00 am"]];
+                return [[Number(day), month, year, "12:00 am"]];
             } else {
                 const date = new Date(year, month, day);
                 const dayOfWeek = date.getDay();
@@ -85,10 +98,56 @@ export default function DataCellsForMainGrid() {
                         className="main-grid__data__cells__cell"
                     >
                         <div className="main-grid__data__cells__cell__event">
-                            {currentWeekDates[j] &&
-                                currentWeekDates[j][3] +
-                                    " " +
-                                    currentWeekDates[j][0]}
+                            {calendarsData.map((calendar: any) => {
+                                const isActive = currentCalendarsID.some(
+                                    (cal: any) => cal.calendarID === calendar.id
+                                );
+                                if (
+                                    calendar.events &&
+                                    isActive &&
+                                    currentWeekDates.length === 7
+                                ) {
+                                    const events = Object.values(
+                                        calendar.events
+                                    );
+
+                                    const currentTime = convertTo24Hour(
+                                        currentWeekDates[j][3]
+                                    );
+
+                                    const matchedEvents = events.filter(
+                                        (event: any) =>
+                                            event.date[0] ===
+                                                currentWeekDates[j][0] &&
+                                            event.date[1] ===
+                                                currentWeekDates[j][1] - 1 &&
+                                            event.date[2] ===
+                                                currentWeekDates[j][2] &&
+                                            currentTime.hours ===
+                                                convertTo24Hour(event.startTime)
+                                                    .hours
+                                    );
+                                    return matchedEvents.map(
+                                        (event: any, eventIndex: number) => (
+                                            <div
+                                                key={`${calendar.id}-${eventIndex}`}
+                                            >
+                                                <RenderEvent
+                                                    event={event}
+                                                    calendarColor={
+                                                        calendar.color
+                                                    }
+                                                    calendarTitle={
+                                                        calendar.title
+                                                    }
+                                                    calendarId={calendar.id}
+                                                />
+                                            </div>
+                                        )
+                                    );
+                                }
+                                return null;
+                            })}
                         </div>
                     </div>
                 );
@@ -106,10 +165,51 @@ export default function DataCellsForMainGrid() {
             cells.push(
                 <div key={`${i}`} className="main-grid__data__cells__cell">
                     <div className="main-grid__data__cells__cell__event">
-                        {currentWeekDates[0] &&
-                            currentWeekDates[0][3] +
-                                " " +
-                                currentWeekDates[0][0]}
+                        {calendarsData.map((calendar: any) => {
+                            const isActive = currentCalendarsID.some(
+                                (cal: any) => cal.calendarID === calendar.id
+                            );
+                            if (
+                                calendar.events &&
+                                isActive &&
+                                currentWeekDates.length === 1
+                            ) {
+                                const events = Object.values(calendar.events);
+
+                                const currentTime = convertTo24Hour(
+                                    currentWeekDates[0][3]
+                                );
+
+                                const matchedEvents = events.filter(
+                                    (event: any) =>
+                                        event.date[0] ===
+                                            currentWeekDates[0][0] &&
+                                        event.date[1] ===
+                                            currentWeekDates[0][1] &&
+                                        event.date[2] ===
+                                            currentWeekDates[0][2] &&
+                                        currentTime.hours ===
+                                            convertTo24Hour(event.startTime)
+                                                .hours
+                                );
+
+                                return matchedEvents.map(
+                                    (event: any, eventIndex: number) => (
+                                        <div
+                                            key={`${calendar.id}-${eventIndex}`}
+                                        >
+                                            <RenderEvent
+                                                event={event}
+                                                calendarColor={calendar.color}
+                                                calendarTitle={calendar.title}
+                                                calendarId={calendar.id}
+                                            />
+                                        </div>
+                                    )
+                                );
+                            }
+                            return null;
+                        })}
                     </div>
                 </div>
             );
@@ -117,6 +217,16 @@ export default function DataCellsForMainGrid() {
         }
         return cells;
     }
+
+    const { data } = useQuery(["calendars"], () =>
+        getCalendars(currentUser.uid)
+    );
+
+    useEffect(() => {
+        if (data) {
+            setCalendarsData(Object.values(data));
+        }
+    }, [data]);
 
     return (
         <div

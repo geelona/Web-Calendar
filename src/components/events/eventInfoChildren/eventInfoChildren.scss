@@ -1,0 +1,130 @@
+.event-info-container__children {
+    display: flex;
+    flex-direction: column;
+
+    & > div {
+        display: flex;
+        align-items: center;
+        gap: 1vw;
+        & > img {
+            align-self: flex-start;
+            height: 1vw;
+        }
+        & > P {
+            margin: 0;
+        }
+    }
+
+    & > .title {
+        font-size: 1.5vw;
+
+        & > img {
+            position: relative;
+            top: 0.4vw;
+        }
+
+        & > p {
+            width: 100%;
+            overflow: scroll;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+    }
+
+    & > .buttons {
+        display: flex;
+        align-items: center;
+        gap: 0.5vw;
+        position: absolute;
+        top: 1vw;
+        right: 3vw;
+
+        & > button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 1.5vw;
+            width: 1.5vw;
+            padding: 0;
+            background: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+
+            &:hover {
+                & > img {
+                    filter: invert(0.5);
+                }
+            }
+
+            &:active {
+                scale: 0.95;
+                & > img {
+                    filter: invert(0.8);
+                }
+            }
+
+            & > img {
+                height: 1vw;
+                transition:
+                    filter 0.1s,
+                    scale 0.1s;
+            }
+        }
+    }
+
+    & > .when-to-send {
+        margin-left: 2vw;
+        margin-top: 0.5vw;
+    }
+
+    & > .calendar {
+        & > .calendar__calendar {
+            display: flex;
+            align-items: center;
+            gap: 0.5vw;
+
+            & > p {
+                margin: 0;
+            }
+
+            & > .calendar__calendar__color {
+                width: 0.75vw;
+                height: 0.75vw;
+                border-radius: 0.25vw;
+            }
+        }
+    }
+
+    & > .description {
+        & > p {
+            overflow: scroll;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+        }
+    }
+
+    & > .buttons,
+    & > .title,
+    & > .when-to-send,
+    & > .calendar {
+        margin-bottom: 1.5vw;
+    }
+}
+
+.delete-event-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.edit-event-modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 32vw;
+}

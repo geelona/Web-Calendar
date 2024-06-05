@@ -98,8 +98,8 @@ function Datepicker({
 
             const tempActiveDay = [
                 +e.target.textContent,
-                currentMonth,
-                currentYear,
+                currentMonthTemp,
+                currentYearTemp,
             ];
             setValue && setValue(tempActiveDay);
         }

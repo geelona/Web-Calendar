@@ -34,7 +34,6 @@ export default function MyCalendars() {
     const [CalendarToDelete, setCalendarToDelete] = useState("");
 
     function deleteCalendarHandler(calendarID: string) {
-        // deleteCalendarMutation.mutate(calendarID);
         setIsTryingToDelete(true);
         setCalendarToDelete(calendarID);
     }
@@ -155,11 +154,16 @@ export default function MyCalendars() {
                                         className="delete-calendar-modal"
                                     >
                                         <DeleteCalendar
-                                            onDelete={() =>
+                                            onDelete={() => {
                                                 deleteCalendarMutation.mutate(
                                                     calendar.id
-                                                )
-                                            }
+                                                );
+                                                dispatch(
+                                                    removeCurrentCalendarID({
+                                                        calendarID: calendar.id,
+                                                    })
+                                                );
+                                            }}
                                             setIsTryingToDelete={
                                                 setIsTryingToDelete
                                             }

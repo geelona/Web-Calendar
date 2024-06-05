@@ -9,13 +9,17 @@ import DatePicker from "../../common/Datepicker/Datepicker";
 
 export default function SpecificDatePicker({
     setDate,
+    date,
 }: {
     setDate: (value: number[]) => void;
+    date: number[];
 }) {
     const imageRef = useRef<HTMLImageElement>(null);
 
     const [opened, setOpened] = useState(false);
-    const [dateExtra, setDateExtra] = useState([] as number[]);
+    const [dateExtra, setDateExtra] = useState(
+        date.length !== 0 ? date : ([] as number[])
+    );
 
     function openMenuHandler() {
         setOpened(!opened);

@@ -43,8 +43,8 @@ function Button({
 Button.propTypes = {
     label: propTypes.string.isRequired,
     color: propTypes.oneOf(["primary", "secondary"]).isRequired,
-    withIcon: propTypes.bool.isRequired,
-    disabled: propTypes.bool.isRequired,
+    withIcon: propTypes.bool,
+    disabled: propTypes.bool,
     onClick: propTypes.func,
     fontSize: propTypes.number,
     customIcon: propTypes.string,

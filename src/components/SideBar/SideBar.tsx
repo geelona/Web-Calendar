@@ -33,7 +33,7 @@ export default function SideBar() {
                 label="Create"
                 color="primary"
                 withIcon={false}
-                disabled={createCalendarBoolean || createEventBoolean}
+                disabled={createEventBoolean}
                 onClick={createEventHandler}
                 fontSize={0.8}
                 customIcon="/components/SideBar/add.png"
@@ -45,7 +45,7 @@ export default function SideBar() {
                     <p>My calendars</p>
                     <button
                         onClick={createCalendarHandler}
-                        disabled={createCalendarBoolean || createEventBoolean}
+                        disabled={createCalendarBoolean}
                     >
                         <img
                             style={{ filter: "invert(1)" }}
@@ -63,7 +63,7 @@ export default function SideBar() {
                         maxWidth="60vw"
                         className="create-edit-event-modal"
                     >
-                        <CreateEditEvent />
+                        <CreateEditEvent close={removeCreateEventHandler} />
                     </Modal>
                 )}
                 {createCalendarBoolean && (
