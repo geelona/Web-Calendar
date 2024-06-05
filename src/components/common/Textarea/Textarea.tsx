@@ -1,6 +1,6 @@
 import propTypes from "prop-types";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import "./Textarea.scss";
 

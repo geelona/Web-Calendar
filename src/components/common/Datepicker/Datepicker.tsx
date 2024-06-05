@@ -14,7 +14,7 @@ function Datepicker({
     realTimeCalendar,
     setValue,
 }: {
-    realTimeCalendar: boolean;
+    realTimeCalendar?: boolean;
     setValue?: (value: number[]) => void;
 }) {
     const dispatch = useDispatch();

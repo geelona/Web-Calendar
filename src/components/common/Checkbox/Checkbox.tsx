@@ -13,20 +13,20 @@ function Checkbox({
 }: {
     LabelOn: boolean;
     Label: string;
-    uniqueKey: string;
-    color: string;
-    checkedValue: boolean;
-    onChange: () => void;
+    uniqueKey?: string;
+    color?: string;
+    checkedValue?: boolean;
+    onChange?: () => void;
     fontSize?: string;
 }) {
     const [isChecked, setIsChecked] = useState(false);
 
     useEffect(() => {
-        setIsChecked(checkedValue);
+        checkedValue && setIsChecked(checkedValue);
     }, [checkedValue]);
 
     const handleCheckboxChange = () => {
-        onChange();
+        onChange && onChange();
     };
 
     const checkboxStyle = {
@@ -70,6 +70,9 @@ Checkbox.propTypes = {
     Label: PropTypes.string,
     uniqueKey: PropTypes.string.isRequired,
     color: PropTypes.string,
+    checkedValue: PropTypes.bool,
+    onChange: PropTypes.func,
+    fontSize: PropTypes.string,
 };
 
 export default Checkbox;

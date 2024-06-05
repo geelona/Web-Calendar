@@ -1,7 +1,7 @@
 import "./ColorPicker.scss";
 
 interface ColorPickerProps {
-    changeColor: (color: string) => void;
+    changeColor?: (color: string) => void;
 }
 
 const ColorPicker: React.FC<ColorPickerProps> = ({ changeColor }) => {
@@ -9,7 +9,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({ changeColor }) => {
         const label = e.target.nextElementSibling as HTMLLabelElement;
         const styles = window.getComputedStyle(label, "::after");
         const background = styles.getPropertyValue("background-color");
-        changeColor(background);
+        changeColor && changeColor(background);
     }
 
     return (

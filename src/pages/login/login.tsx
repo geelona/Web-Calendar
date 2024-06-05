@@ -10,7 +10,6 @@ import { ValidateEmail } from "../../utils/validation/emailValidation";
 import { ValidatePassword } from "../../utils/validation/passwordValidation";
 
 import { useAuth } from "../../contexts/AuthContext";
-import { set } from "firebase/database";
 
 export default function Login() {
     const navigate = useNavigate();
