@@ -19,10 +19,10 @@ function Checkbox({
     onChange?: () => void;
     fontSize?: string;
 }) {
-    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState(checkedValue || false);
 
     useEffect(() => {
-        checkedValue && setIsChecked(checkedValue);
+        setIsChecked(checkedValue || false);
     }, [checkedValue]);
 
     const handleCheckboxChange = () => {

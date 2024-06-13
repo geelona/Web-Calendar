@@ -119,9 +119,10 @@ export default function MyCalendars() {
                             Label={calendar.title}
                             uniqueKey={"calendar-" + calendar.id}
                             color={calendar.color}
-                            checkedValue={currentCalendars.some(
-                                (item: any) => item.calendarID === calendar.id
-                            )}
+                            checkedValue={currentCalendars.some((item: any) => {
+                                const temp = item.calendarID === calendar.id;
+                                return temp;
+                            })}
                             onChange={() => onChekedChange(calendar.id)}
                         />
                         <div className="calendar__tools">
