@@ -30,7 +30,8 @@ Follow these instructions to get a local copy of the project running on your mac
    git clone https://github.com/your-username/Web-Calendar.git
 
 2. Navigate to the project directory:
-  cd Web-Calendar
+   ```bash
+   ``` cd Web-Calendar```
 
 3. Install dependencies: Run the following command to install all the required dependencies using npm:
   npm install
