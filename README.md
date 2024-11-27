@@ -31,11 +31,16 @@ Follow these instructions to get a local copy of the project running on your mac
 
 2. Navigate to the project directory:
    ```bash
-   ``` cd Web-Calendar```
+   cd Web-Calendar
 
 3. Install dependencies: Run the following command to install all the required dependencies using npm:
-  npm install
+   ```bash  
+   npm install
 
 4. Run the project: After the dependencies are installed, you can start the development server:
-  npm run dev
+  ```bash
+   npm run dev
+
 5. Access the application: Once the server is running, open your browser and navigate to http://localhost:3000 (or the URL shown in your terminal) to view the application.
+
+
