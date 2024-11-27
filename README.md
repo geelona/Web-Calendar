@@ -12,8 +12,8 @@ This is a Web Calendar application designed for managing and viewing calendar ev
 ## Technologies Used
 - **Frontend**: HTML, CSS, JavaScript
 - **Build Tool**: Vite
-- **Authentication**: Custom login system (can be extended with Firebase or other backend)
-- **State Management**: Local storage or simple JSON server for saving events (or a real database if implemented)
+- **Authentication & Data Storage**: Firebase (Authentication and Realtime Database)
+- **State Management**: Firebase Realtime Database for event data storage
 
 ## Getting Started
 
