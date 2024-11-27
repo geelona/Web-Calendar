@@ -40,6 +40,7 @@ Follow these instructions to get a local copy of the project running on your mac
 4. Run the project: After the dependencies are installed, you can start the development server:
   ```bash
    npm run dev
+   ```
 
 5. Access the application: Once the server is running, open your browser and navigate to http://localhost:3000 (or the URL shown in your terminal) to view the application.
 
